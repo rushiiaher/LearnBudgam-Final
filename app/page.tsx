@@ -241,53 +241,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* CEO Message Section */}
-        <section className="py-8 md:py-12 bg-white overflow-hidden">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col md:flex-row items-center gap-8 lg:gap-12">
-              {/* Image Column */}
-              <div className="w-full md:w-5/12 lg:w-4/12 flex justify-center md:justify-end">
-                <div className="relative group">
-                  <div className="absolute inset-0 bg-blue-100 rounded-full transform scale-105 translate-x-2 translate-y-2 transition-transform duration-500 group-hover:scale-110"></div>
-                  <div className="relative w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-8 border-white shadow-2xl transition-transform duration-500 group-hover:scale-105">
-                    <img
-                      src="/Cheif-Education-Officer-Budgam.png"
-                      alt="Mtr Rifat Irfan Qadri"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-              </div>
 
-              {/* Text Column */}
-              <div className="w-full md:w-7/12 lg:w-8/12 text-center md:text-left">
-                <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Mtr Rifat Irfan Qadri</h2>
-                <div className="w-24 h-1.5 bg-orange-500 mx-auto md:mx-0 mb-4 rounded-full"></div>
-
-                <div className="space-y-3 text-lg text-muted-foreground leading-relaxed text-justify md:text-left italic">
-                  <p>
-                    As the head of the Chief Education Office, Budgam, I take immense pride in leading a team deeply committed to shaping a future filled with boundless opportunities for our children. We believe that education extends far beyond the simple acquisition of knowledge—it is about nurturing character, igniting curiosity, and equipping the next generation to become resilient, innovative, and compassionate leaders.
-                  </p>
-                  <p>
-                    Our vision is to build an educational ecosystem that is inclusive, equitable, and of the highest global standards. To realize this, we are steadfastly working to modernize our school infrastructure, introduce smart classrooms, and ensure our educators receive world-class professional development and support.
-                  </p>
-                  <p>
-                    The path ahead is both demanding and inspiring. We are focused on implementing forward-thinking policies aimed not only at enhancing academic achievement but also at cultivating civic responsibility and a lifelong passion for learning.
-                  </p>
-                  <p>
-                    With the unwavering support of our community, parents, and devoted educators, I am confident that together we can transform the educational landscape of Budgam and establish a new benchmark of excellence.
-                  </p>
-                </div>
-
-                <div className="mt-4">
-                  <h3 className="text-2xl font-serif font-bold text-gray-900 border-b-2 border-gray-200 inline-block pb-2">Chief Education Officer Budgam</h3>
-                </div>
-              </div>
-            </div>
-
-            <div className="w-full h-1 bg-gradient-to-r from-green-500 via-white to-orange-500 mt-12 opacity-50"></div>
-          </div>
-        </section>
 
         {/* Features Boxes Section */}
         <section className="py-16 md:py-24 bg-gray-50">
@@ -331,19 +285,19 @@ export default function HomePage() {
 
               <div className="bg-white p-6 rounded-lg shadow-sm text-center h-96 group overflow-hidden relative touch-manipulation focus-within:ring-2 focus-within:ring-blue-500" tabIndex={0}>
                 <img
-                  src="/CEO  budgam.jpg"
-                  alt="Shri Rajeev Abrol"
+                  src="/Cheif-Education-Officer-Budgam.png"
+                  alt="Mtr Rifat Irfan Qadri"
                   className="w-40 h-40 object-cover rounded-full mx-auto mb-4"
                 />
-                <h3 className="text-lg font-semibold mb-3">Shri Rajeev Abrol (CEO, Budgam)</h3>
+                <h3 className="text-lg font-semibold mb-3">Mtr Rifat Irfan Qadri (CEO, Budgam)</h3>
                 <div className="absolute inset-0 bg-white p-6 text-center transform translate-y-full hover:translate-y-0 group-hover:translate-y-0 group-active:translate-y-0 group-focus-within:translate-y-0 transition-transform duration-300 overflow-y-auto">
                   <img
-                    src="/CEO  budgam.jpg"
-                    alt="Shri Rajeev Abrol"
+                    src="/Cheif-Education-Officer-Budgam.png"
+                    alt="Mtr Rifat Irfan Qadri"
                     className="w-24 h-24 object-cover rounded-full mx-auto mb-3"
                   />
-                  <h3 className="text-sm font-semibold mb-2">Shri Rajeev Abrol (CEO, Budgam)</h3>
-                  <p className="text-gray-600 text-xs leading-relaxed">Shri Rajeev Abrol leads the School Education Department in Budgam district, responsible for implementing educational policies, improving school quality, and ensuring equitable learning opportunities across all government and aided schools. Under his guidance, the CEO Office works to uphold academic standards, enforce regulations, and support teachers and students in achieving educational excellence.</p>
+                  <h3 className="text-sm font-semibold mb-2">Mtr Rifat Irfan Qadri (CEO, Budgam)</h3>
+                  <p className="text-gray-600 text-xs leading-relaxed">Mtr Rifat Irfan Qadri heads the Chief Education Office in Budgam. She leads a team committed to shaping a future filled with opportunities for children, believing education extends beyond knowledge to nurturing character and curiosity. Her vision is to build an inclusive, equitable educational ecosystem of global standards, modernizing infrastructure and supporting educators to cultivate resilient, innovative, and compassionate leaders.</p>
                 </div>
               </div>
 

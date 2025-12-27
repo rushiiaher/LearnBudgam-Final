@@ -2,11 +2,12 @@ module.exports = {
     apps: [
         {
             name: "learn-budgam",
-            script: "pnpm",
-            args: "start:vps",
+            script: "node_modules/next/dist/bin/next",
+            args: "start -p 3004",
             env: {
                 NODE_ENV: "production",
             },
+            time: true
         },
     ],
 };
