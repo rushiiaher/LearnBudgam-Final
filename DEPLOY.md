@@ -1,10 +1,10 @@
-# Deployment Guide for Ubuntu VPS
+# Deployment Guide for Ubuntu VPS (PNPM Version)
 
 This project is configured to run on Port **3003** to avoid conflicts with other apps on your server.
 
 ## Prerequisites
-- **Locally**: `npm` installed.
-- **Server**: Node.js, PM2, and Nginx installed.
+- **Locally**: `pnpm` installed.
+- **Server**: Node.js, `pnpm` (install via `npm install -g pnpm`), PM2, and Nginx installed.
 - **Reserved Ports**: 3000, 3001, 3002 are BUSY/UNSAFE. This app uses **3003**.
 
 ## 1. Build Locally (Windows)
@@ -12,7 +12,7 @@ Because the VPS is low on RAM, **NEVER** build on the server.
 Run this on your local machine:
 
 ```powershell
-npm run build
+pnpm run build
 ```
 
 ## 2. Prepare Files for Upload
@@ -22,6 +22,7 @@ You need to upload specific files/folders to the server at `/var/www/learn-budga
 - `.next/` (The build output)
 - `public/` (Static assets)
 - `package.json`
+- `pnpm-lock.yaml`
 - `next.config.mjs`
 - `ecosystem.config.js`
 
@@ -34,7 +35,7 @@ Replace `user` and `your_vps_ip` with actual values.
 
 ```powershell
 # Example SCP commands (run from project root)
-scp package.json ecosystem.config.js next.config.mjs user@your_vps_ip:/var/www/learn-budgam/
+scp package.json pnpm-lock.yaml ecosystem.config.js next.config.mjs user@your_vps_ip:/var/www/learn-budgam/
 scp -r .next user@your_vps_ip:/var/www/learn-budgam/
 scp -r public user@your_vps_ip:/var/www/learn-budgam/
 ```
@@ -45,11 +46,11 @@ Log in to your VPS and navigate to the folder.
 ```bash
 cd /var/www/learn-budgam
 # Install production dependencies only (saves RAM/Disk)
-npm install --production
+pnpm install --prod
 ```
 
 ## 5. Start Application with PM2
-We use `ecosystem.config.js` to manage the process.
+We use `ecosystem.config.js` to manage the process via `pnpm`.
 
 ```bash
 # Start/Restart
