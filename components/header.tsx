@@ -15,6 +15,7 @@ export function Header() {
     { href: "/about", label: "About" },
     { href: "/schools", label: "Schools" },
     { href: "https://jkbose.nic.in/TextBooks.html", label: "Textbook", external: true },
+    { href: "/lectures", label: "Lectures" },
     { href: "/features", label: "Features" },
     { href: "/impact", label: "Impact" },
     { href: "/gallery", label: "Gallery" },
@@ -44,11 +45,10 @@ export function Header() {
                   key={link.href}
                   href={link.href}
                   {...(link.external && { target: "_blank", rel: "noopener noreferrer" })}
-                  className={`px-3 py-2 text-sm font-medium transition-colors relative ${
-                    isActive(link.href) && !link.external
-                      ? "text-black border-b-2 border-green-500"
-                      : "text-gray-600 hover:text-black hover:bg-gray-100 rounded-md"
-                  }`}
+                  className={`px-3 py-2 text-sm font-medium transition-colors relative ${isActive(link.href) && !link.external
+                    ? "text-black border-b-2 border-green-500"
+                    : "text-gray-600 hover:text-black hover:bg-gray-100 rounded-md"
+                    }`}
                 >
                   {link.label}
                 </Link>
@@ -80,11 +80,10 @@ export function Header() {
                   key={link.href}
                   href={link.href}
                   {...(link.external && { target: "_blank", rel: "noopener noreferrer" })}
-                  className={`block px-3 py-2 text-sm font-medium transition-colors ${
-                    isActive(link.href) && !link.external
-                      ? "text-black border-l-4 border-green-500 bg-gray-100"
-                      : "text-gray-600 hover:text-black hover:bg-gray-100 rounded-md"
-                  }`}
+                  className={`block px-3 py-2 text-sm font-medium transition-colors ${isActive(link.href) && !link.external
+                    ? "text-black border-l-4 border-green-500 bg-gray-100"
+                    : "text-gray-600 hover:text-black hover:bg-gray-100 rounded-md"
+                    }`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.label}

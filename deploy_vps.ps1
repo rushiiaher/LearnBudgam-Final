@@ -3,7 +3,7 @@ $ErrorActionPreference = "Stop"
 # --- CONFIGURATION ---
 # Replace 'YOUR_VPS_IP' with your actual server IP address (e.g., 123.45.67.89)
 $ServerUser = "root"
-$ServerIP = "YOUR_VPS_IP"
+$ServerIP = "69.62.84.118"
 $RemotePath = "/var/www/learnBudgam/"
 # ---------------------
 
