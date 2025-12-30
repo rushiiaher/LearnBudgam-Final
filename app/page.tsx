@@ -129,7 +129,6 @@ export default function HomePage() {
                     }
                     .animate-marquee {
                       animation: marquee 18s linear infinite;
-                      animation-delay: 4s;
                       transform: translateX(100%);
                     }
                   `}</style>

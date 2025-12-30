@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { useState } from "react"
@@ -16,6 +17,7 @@ export function Header() {
     { href: "/schools", label: "Schools" },
     { href: "https://jkbose.nic.in/TextBooks.html", label: "Textbook", external: true },
     { href: "/lectures", label: "Lectures" },
+    { href: "/blog", label: "Blog" },
     { href: "/features", label: "Features" },
     { href: "/impact", label: "Impact" },
     { href: "/gallery", label: "Gallery" },
@@ -31,11 +33,15 @@ export function Header() {
       <header className="fixed top-0 z-50 w-full border-b border-gray-200 bg-white backdrop-blur">
         <div className="container mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
-            <Link href="/" className="flex items-center space-x-2 flex-shrink-0">
-              <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-lg bg-black flex items-center justify-center">
-                <span className="text-white font-bold text-sm sm:text-lg">BS</span>
-              </div>
-              <span className="font-semibold text-sm sm:text-lg text-balance text-black">Learn Budgam</span>
+            <Link href="/" className="flex items-center gap-3 flex-shrink-0 ml-4">
+              <Image
+                src="/logo2.png"
+                alt="Learn Budgam Logo"
+                width={50}
+                height={50}
+                className="h-12 w-12 sm:h-14 sm:w-14 object-contain"
+              />
+              <span className="font-semibold text-lg sm:text-xl text-black">Learn Budgam</span>
             </Link>
 
             {/* Desktop Navigation */}

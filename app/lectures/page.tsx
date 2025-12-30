@@ -44,26 +44,17 @@ export default function LecturesPage() {
             <Header />
 
             <main className="flex-1">
-                {/* Hero Section */}
-                <section className="relative bg-gradient-to-br from-primary to-accent py-16 md:py-24 text-primary-foreground overflow-hidden">
-                    <div className="absolute inset-0 bg-black/10"></div>
-                    <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                        <div className="max-w-3xl mx-auto text-center">
-                            <div className="inline-flex items-center justify-center p-3 bg-white/10 rounded-full mb-6 backdrop-blur-sm">
-                                <PlayCircle className="h-6 w-6 text-white mr-2" />
-                                <span className="font-medium text-white">Video Library</span>
-                            </div>
-                            <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Educational Lectures & Events</h1>
-                            <p className="text-lg md:text-xl text-primary-foreground/90 leading-relaxed max-w-2xl mx-auto">
+                {/* Videos Grid */}
+                <section className="py-8 md:py-12">
+                    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="text-center mb-12">
+                            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">Educational Lectures & Events</h2>
+                            <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
+                            <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
                                 Explore our collection of video lectures, events, and educational content from Budgam schools.
                             </p>
                         </div>
-                    </div>
-                </section>
-
-                {/* Videos Grid */}
-                <section className="py-16 md:py-24">
-                    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                        
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {videos.map((video) => (
                                 <Card key={video.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 border-none shadow-md group">
