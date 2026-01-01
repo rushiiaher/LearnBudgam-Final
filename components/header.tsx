@@ -44,7 +44,7 @@ export function Header() {
                   className="h-12 w-12 sm:h-14 sm:w-14 object-cover rounded-full mix-blend-multiply dark:mix-blend-screen"
                 />
               </div>
-              <span className="font-semibold text-lg sm:text-xl text-foreground">𝕾𝖗𝖎𝖓𝖆𝖌𝖆𝖗</span>
+              <span className="font-semibold text-lg sm:text-xl text-foreground">𝕭𝖚𝖉𝖌𝖆𝖒</span>
             </Link>
 
             {/* Desktop Navigation */}
