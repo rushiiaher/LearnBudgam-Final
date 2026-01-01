@@ -30,19 +30,21 @@ export function Header() {
 
   return (
     <>
-      <header className="fixed top-0 z-50 w-full border-b border-gray-200 bg-white backdrop-blur">
+      <header className="fixed top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
-            <Link href="/" className="flex items-center gap-3 flex-shrink-0 ml-4">
-              <span className="font-semibold text-xl sm:text-2xl text-foreground">𝕷𝖊𝖆𝖗𝖓</span>
-              <Image
-                src="/logo2.png"
-                alt="Learn Budgam Logo"
-                width={50}
-                height={50}
-                className="h-12 w-12 sm:h-14 sm:w-14 object-contain rounded-full"
-              />
-              <span className="font-semibold text-2xl sm:text-2xl text-foreground">𝔅𝔲𝔡𝔤𝔞𝔪</span>
+            <Link href="/" className="flex items-center gap-2 flex-shrink-0 ml-4">
+              <span className="font-semibold text-lg sm:text-xl text-foreground">𝕷𝖊𝖆𝖗𝖓</span>
+              <div className="relative h-14 w-14 sm:h-16 sm:w-16 flex items-center justify-center">
+                <Image
+                  src="/logo2.png"
+                  alt="Learn Budgam Logo"
+                  width={56}
+                  height={56}
+                  className="h-12 w-12 sm:h-14 sm:w-14 object-cover rounded-full mix-blend-multiply dark:mix-blend-screen"
+                />
+              </div>
+              <span className="font-semibold text-lg sm:text-xl text-foreground">𝕾𝖗𝖎𝖓𝖆𝖌𝖆𝖗</span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -53,8 +55,8 @@ export function Header() {
                   href={link.href}
                   {...(link.external && { target: "_blank", rel: "noopener noreferrer" })}
                   className={`px-3 py-2 text-sm font-medium transition-colors relative ${isActive(link.href) && !link.external
-                    ? "text-black border-b-2 border-green-500"
-                    : "text-gray-600 hover:text-black hover:bg-gray-100 rounded-md"
+                    ? "text-foreground border-b-2 border-primary"
+                    : "text-muted-foreground hover:text-foreground hover:bg-accent rounded-md"
                     }`}
                 >
                   {link.label}
@@ -64,7 +66,7 @@ export function Header() {
 
             <div className="flex items-center gap-3">
               <Link href="/login" className="hidden sm:block">
-                <Button variant="outline" size="sm" className="border-gray-300 text-black hover:bg-gray-100">
+                <Button variant="outline" size="sm" className="border-border text-foreground hover:bg-accent">
                   Login
                 </Button>
               </Link>
@@ -72,7 +74,7 @@ export function Header() {
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-2 text-black hover:bg-gray-100 rounded-md"
+                className="lg:hidden p-2 text-foreground hover:bg-accent rounded-md"
               >
                 {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -81,15 +83,15 @@ export function Header() {
 
           {/* Mobile Navigation */}
           {mobileMenuOpen && (
-            <nav className="lg:hidden py-4 space-y-1 border-t border-gray-200">
+            <nav className="lg:hidden py-4 space-y-1 border-t border-border">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   {...(link.external && { target: "_blank", rel: "noopener noreferrer" })}
                   className={`block px-3 py-2 text-sm font-medium transition-colors ${isActive(link.href) && !link.external
-                    ? "text-black border-l-4 border-green-500 bg-gray-100"
-                    : "text-gray-600 hover:text-black hover:bg-gray-100 rounded-md"
+                    ? "text-foreground border-l-4 border-primary bg-accent"
+                    : "text-muted-foreground hover:text-foreground hover:bg-accent rounded-md"
                     }`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -97,7 +99,7 @@ export function Header() {
                 </Link>
               ))}
               <Link href="/login" className="block sm:hidden">
-                <Button variant="outline" size="sm" className="w-full border-gray-300 text-black hover:bg-gray-100">
+                <Button variant="outline" size="sm" className="w-full border-border text-foreground hover:bg-accent">
                   Login
                 </Button>
               </Link>
