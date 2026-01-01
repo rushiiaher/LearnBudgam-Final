@@ -7,14 +7,30 @@ export default function BlogPage() {
   const blogPosts = [
     {
       id: 1,
-      title: "How Digital Education is Transforming Schools in Budgam",
-      excerpt: "Education in Budgam is entering a new digital era. With the introduction of smart classrooms, online attendance systems, digital learning platforms, and centralized school management, students and teachers are experiencing a more interactive and transparent education system.",
+      title: "Why the First Year of Middle School Feels Confusing",
+      excerpt: "For many students, Class 6 is the first time studies feel serious. New subjects, new teachers, and longer books can feel overwhelming. This confusion is normal. Students who slowly adjust their routine and don't panic usually perform better by the end of the year.",
+      author: "Academic Team",
+      date: "December 25, 2023",
+      image: "/1st.jpg"
+    },
+    {
+      id: 2,
+      title: "Exams Are a Learning Tool, Not a Threat",
+      excerpt: "Students first face serious exams in Class 6. By Class 7, exams feel routine. In Class 8, exams help students understand their strengths before entering higher classes.",
       author: "Education Team",
       date: "March 15, 2024",
       image: "/1.jpg"
     },
     {
-      id: 2,
+      id: 3,
+      title: "I Often See Students Losing Marks for Simple Reasons",
+      excerpt: "In Class 7, many students know the answers but still lose marks. The reason is usually small mistakes — not reading questions properly or writing unclear answers. These mistakes are avoidable with a little attention and practice.",
+      author: "Evaluation Team",
+      date: "December 20, 2023",
+      image: "/2nd.jpg"
+    },
+    {
+      id: 4,
       title: "Smart School Initiative: A New Future for Budgam Students",
       excerpt: "The Smart School Initiative in Budgam aims to modernize traditional classrooms using technology-driven solutions. Features like live online classes, digital exams, performance tracking, and real-time communication have created a smarter and more efficient education ecosystem.",
       author: "Admin Team",
@@ -22,7 +38,15 @@ export default function BlogPage() {
       image: "/2.jpg"
     },
     {
-      id: 3,
+      id: 5,
+      title: "When Studies Start Feeling Heavy",
+      excerpt: "Class 8 is often the point where students feel real academic pressure. Syllabus becomes deeper and expectations increase. Students who stay regular and don't delay revision manage this phase much better.",
+      author: "Guidance Team",
+      date: "December 15, 2023",
+      image: "/3rd.jpg"
+    },
+    {
+      id: 6,
       title: "Role of Teachers in Digital Transformation of Budgam Schools",
       excerpt: "Teachers play a crucial role in the successful implementation of digital education. In Budgam, teachers are being trained to use smart boards, online teaching tools, and digital assessment methods.",
       author: "Training Department",
@@ -30,7 +54,15 @@ export default function BlogPage() {
       image: "/3.jpg"
     },
     {
-      id: 4,
+      id: 7,
+      title: "Why Daily Study Matters More Than Long Study Hours",
+      excerpt: "Studying for many hours on one day and skipping the next rarely works. Learning improves when study becomes a daily habit. Even short daily sessions build confidence over time.",
+      author: "Study Team",
+      date: "December 10, 2023",
+      image: "/7.jpg"
+    },
+    {
+      id: 8,
       title: "Benefits of Digital School Management for Parents",
       excerpt: "Digital school management systems have empowered parents in Budgam by providing real-time access to attendance, academic performance, homework, and school announcements.",
       author: "Development Team",
@@ -38,12 +70,60 @@ export default function BlogPage() {
       image: "/4.jpg"
     },
     {
-      id: 5,
+      id: 9,
+      title: "Why Many Students Fear Maths Without Reason",
+      excerpt: "Maths fear often starts in Class 6 when students face new concepts. The fear is not because Maths is difficult, but because students stop practicing. Regular practice removes fear faster than any shortcut.",
+      author: "Math Team",
+      date: "December 5, 2023",
+      image: "/8.jpg"
+    },
+    {
+      id: 10,
       title: "Bridging the Education Gap in Rural Budgam Through Technology",
       excerpt: "Technology has become a powerful tool in bridging educational gaps in rural areas of Budgam. Online learning platforms and centralized digital systems ensure equal learning opportunities for all students, regardless of location.",
       author: "Community Team",
       date: "February 20, 2024",
       image: "/5.jpg"
+    },
+    {
+      id: 11,
+      title: "Reading Again and Again Is Not Enough",
+      excerpt: "Many Class 7 students believe that reading chapters multiple times is sufficient. But exams demand written answers. Writing practice helps organise thoughts and improves memory.",
+      author: "Learning Team",
+      date: "November 30, 2023",
+      image: "/D1.jpg"
+    },
+    {
+      id: 12,
+      title: "The Silent Pressure Students Don't Talk About",
+      excerpt: "By Class 8, many students feel pressure but don't express it. They worry about expectations, marks, and future classes. Open discussion and proper guidance reduce this stress significantly.",
+      author: "Counseling Team",
+      date: "November 25, 2023",
+      image: "/9.jpg"
+    },
+    {
+      id: 13,
+      title: "Good Handwriting Is Not About Beauty",
+      excerpt: "Neat handwriting helps examiners understand answers easily. It also shows discipline. Good presentation reflects clear thinking and helps students express their knowledge effectively.",
+      author: "Skills Team",
+      date: "November 20, 2023",
+      image: "/10.jpg"
+    },
+    {
+      id: 14,
+      title: "Why Comparing Marks Does More Harm Than Good",
+      excerpt: "In Class 7, students start comparing marks with friends. This comparison often lowers confidence. Every student learns differently. Improvement matters more than comparison.",
+      author: "Motivation Team",
+      date: "November 15, 2023",
+      image: "/12.jpg"
+    },
+    {
+      id: 15,
+      title: "Revision Is the Most Ignored Part of Studying",
+      excerpt: "Many students finish the syllabus but forget to revise. In Class 8, this habit becomes a serious problem. Regular revision reduces exam stress and improves performance significantly.",
+      author: "Revision Team",
+      date: "November 10, 2023",
+      image: "/13.jpg"
     }
   ]
 
@@ -78,7 +158,7 @@ export default function BlogPage() {
                             <img
                               src={post.image}
                               alt={post.title}
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                              className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
                             />
                           </div>
                           <div className="md:w-3/4 p-4">

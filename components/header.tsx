@@ -34,14 +34,15 @@ export function Header() {
         <div className="container mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <Link href="/" className="flex items-center gap-3 flex-shrink-0 ml-4">
+              <span className="font-semibold text-xl sm:text-2xl text-foreground">𝕷𝖊𝖆𝖗𝖓</span>
               <Image
                 src="/logo2.png"
                 alt="Learn Budgam Logo"
                 width={50}
                 height={50}
-                className="h-12 w-12 sm:h-14 sm:w-14 object-contain"
+                className="h-12 w-12 sm:h-14 sm:w-14 object-contain rounded-full"
               />
-              <span className="font-semibold text-lg sm:text-xl text-black">Learn Budgam</span>
+              <span className="font-semibold text-2xl sm:text-2xl text-foreground">𝔅𝔲𝔡𝔤𝔞𝔪</span>
             </Link>
 
             {/* Desktop Navigation */}

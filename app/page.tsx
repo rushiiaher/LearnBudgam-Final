@@ -284,24 +284,6 @@ export default function HomePage() {
 
               <div className="bg-white p-6 rounded-lg shadow-sm text-center h-96 group overflow-hidden relative touch-manipulation focus-within:ring-2 focus-within:ring-blue-500" tabIndex={0}>
                 <img
-                  src="/Cheif-Education-Officer-Budgam.png"
-                  alt="Mtr Rifat Irfan Qadri"
-                  className="w-40 h-40 object-cover rounded-full mx-auto mb-4"
-                />
-                <h3 className="text-lg font-semibold mb-3">Mtr Rifat Irfan Qadri (CEO, Budgam)</h3>
-                <div className="absolute inset-0 bg-white p-6 text-center transform translate-y-full hover:translate-y-0 group-hover:translate-y-0 group-active:translate-y-0 group-focus-within:translate-y-0 transition-transform duration-300 overflow-y-auto">
-                  <img
-                    src="/Cheif-Education-Officer-Budgam.png"
-                    alt="Mtr Rifat Irfan Qadri"
-                    className="w-24 h-24 object-cover rounded-full mx-auto mb-3"
-                  />
-                  <h3 className="text-sm font-semibold mb-2">Mtr Rifat Irfan Qadri (CEO, Budgam)</h3>
-                  <p className="text-gray-600 text-xs leading-relaxed">Mtr Rifat Irfan Qadri heads the Chief Education Office in Budgam. She leads a team committed to shaping a future filled with opportunities for children, believing education extends beyond knowledge to nurturing character and curiosity. Her vision is to build an inclusive, equitable educational ecosystem of global standards, modernizing infrastructure and supporting educators to cultivate resilient, innovative, and compassionate leaders.</p>
-                </div>
-              </div>
-
-              <div className="bg-white p-6 rounded-lg shadow-sm text-center h-96 group overflow-hidden relative touch-manipulation focus-within:ring-2 focus-within:ring-blue-500" tabIndex={0}>
-                <img
                   src="/dc.jpg"
                   alt="Dr. Bilal Mohi-ud-Din Bhat"
                   className="w-40 h-40 object-cover rounded-full mx-auto mb-4"
@@ -315,6 +297,24 @@ export default function HomePage() {
                   />
                   <h3 className="text-sm font-semibold mb-2">Dr. Bilal Mohi-ud-Din Bhat (DC, Budgam)</h3>
                   <p className="text-gray-600 text-xs leading-relaxed">Dr. Bilal Mohi-ud-Din Bhat is the Deputy Commissioner (DC) of Budgam district in the Union Territory of Jammu & Kashmir. He assumed charge as DC Budgam in June 2025, taking over the responsibilities of the district's chief administrative officer. As DC, Dr. Bhat is the senior most administrative officer in Budgam, responsible for overall governance, development, public welfare, law and order, and coordination of government departments in the district.</p>
+                </div>
+              </div>
+
+              <div className="bg-white p-6 rounded-lg shadow-sm text-center h-96 group overflow-hidden relative touch-manipulation focus-within:ring-2 focus-within:ring-blue-500" tabIndex={0}>
+                <img
+                  src="/Cheif-Education-Officer-Budgam.png"
+                  alt="Mtr Rifat Irfan Qadri"
+                  className="w-40 h-40 object-cover rounded-full mx-auto mb-4"
+                />
+                <h3 className="text-lg font-semibold mb-3">Mtr Rifat Irfan Qadri (CEO, Budgam)</h3>
+                <div className="absolute inset-0 bg-white p-6 text-center transform translate-y-full hover:translate-y-0 group-hover:translate-y-0 group-active:translate-y-0 group-focus-within:translate-y-0 transition-transform duration-300 overflow-y-auto">
+                  <img
+                    src="/Cheif-Education-Officer-Budgam.png"
+                    alt="Mtr Rifat Irfan Qadri"
+                    className="w-24 h-24 object-cover rounded-full mx-auto mb-3"
+                  />
+                  <h3 className="text-sm font-semibold mb-2">Mtr Rifat Irfan Qadri (CEO, Budgam)</h3>
+                  <p className="text-gray-600 text-xs leading-relaxed">Mtr Rifat Irfan Qadri heads the Chief Education Office in Budgam. She leads a team committed to shaping a future filled with opportunities for children, believing education extends beyond knowledge to nurturing character and curiosity. Her vision is to build an inclusive, equitable educational ecosystem of global standards, modernizing infrastructure and supporting educators to cultivate resilient, innovative, and compassionate leaders.</p>
                 </div>
               </div>
             </div>
