@@ -1,9 +1,17 @@
+"use client"
+
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 import { Calendar, User } from "lucide-react"
+import { useState } from "react"
 
 export default function BlogPage() {
+  const [selectedCategory, setSelectedCategory] = useState("All")
+
+  const categories = ["All", "Academics", "Announcements", "Technology", "Student Life", "Teacher Training"]
+
   const blogPosts = [
     {
       id: 1,
@@ -11,7 +19,8 @@ export default function BlogPage() {
       excerpt: "For many students, Class 6 is the first time studies feel serious. New subjects, new teachers, and longer books can feel overwhelming. This confusion is normal. Students who slowly adjust their routine and don't panic usually perform better by the end of the year.",
       author: "Academic Team",
       date: "December 25, 2023",
-      image: "/1st.jpg"
+      image: "/1st.jpg",
+      category: "Academics"
     },
     {
       id: 2,
@@ -19,7 +28,8 @@ export default function BlogPage() {
       excerpt: "Students first face serious exams in Class 6. By Class 7, exams feel routine. In Class 8, exams help students understand their strengths before entering higher classes.",
       author: "Education Team",
       date: "March 15, 2024",
-      image: "/1.jpg"
+      image: "/1.jpg",
+      category: "Academics"
     },
     {
       id: 3,
@@ -27,7 +37,8 @@ export default function BlogPage() {
       excerpt: "In Class 7, many students know the answers but still lose marks. The reason is usually small mistakes — not reading questions properly or writing unclear answers. These mistakes are avoidable with a little attention and practice.",
       author: "Evaluation Team",
       date: "December 20, 2023",
-      image: "/2nd.jpg"
+      image: "/2nd.jpg",
+      category: "Student Life"
     },
     {
       id: 4,
@@ -35,7 +46,8 @@ export default function BlogPage() {
       excerpt: "The Smart School Initiative in Budgam aims to modernize traditional classrooms using technology-driven solutions. Features like live online classes, digital exams, performance tracking, and real-time communication have created a smarter and more efficient education ecosystem.",
       author: "Admin Team",
       date: "March 10, 2024",
-      image: "/2.jpg"
+      image: "/2.jpg",
+      category: "Announcements"
     },
     {
       id: 5,
@@ -43,7 +55,8 @@ export default function BlogPage() {
       excerpt: "Class 8 is often the point where students feel real academic pressure. Syllabus becomes deeper and expectations increase. Students who stay regular and don't delay revision manage this phase much better.",
       author: "Guidance Team",
       date: "December 15, 2023",
-      image: "/3rd.jpg"
+      image: "/3rd.jpg",
+      category: "Student Life"
     },
     {
       id: 6,
@@ -51,7 +64,8 @@ export default function BlogPage() {
       excerpt: "Teachers play a crucial role in the successful implementation of digital education. In Budgam, teachers are being trained to use smart boards, online teaching tools, and digital assessment methods.",
       author: "Training Department",
       date: "March 5, 2024",
-      image: "/3.jpg"
+      image: "/3.jpg",
+      category: "Teacher Training"
     },
     {
       id: 7,
@@ -59,7 +73,8 @@ export default function BlogPage() {
       excerpt: "Studying for many hours on one day and skipping the next rarely works. Learning improves when study becomes a daily habit. Even short daily sessions build confidence over time.",
       author: "Study Team",
       date: "December 10, 2023",
-      image: "/7.jpg"
+      image: "/7.jpg",
+      category: "Student Life"
     },
     {
       id: 8,
@@ -67,7 +82,8 @@ export default function BlogPage() {
       excerpt: "Digital school management systems have empowered parents in Budgam by providing real-time access to attendance, academic performance, homework, and school announcements.",
       author: "Development Team",
       date: "February 28, 2024",
-      image: "/4.jpg"
+      image: "/4.jpg",
+      category: "Technology"
     },
     {
       id: 9,
@@ -75,7 +91,8 @@ export default function BlogPage() {
       excerpt: "Maths fear often starts in Class 6 when students face new concepts. The fear is not because Maths is difficult, but because students stop practicing. Regular practice removes fear faster than any shortcut.",
       author: "Math Team",
       date: "December 5, 2023",
-      image: "/8.jpg"
+      image: "/8.jpg",
+      category: "Academics"
     },
     {
       id: 10,
@@ -83,7 +100,8 @@ export default function BlogPage() {
       excerpt: "Technology has become a powerful tool in bridging educational gaps in rural areas of Budgam. Online learning platforms and centralized digital systems ensure equal learning opportunities for all students, regardless of location.",
       author: "Community Team",
       date: "February 20, 2024",
-      image: "/5.jpg"
+      image: "/5.jpg",
+      category: "Technology"
     },
     {
       id: 11,
@@ -91,7 +109,8 @@ export default function BlogPage() {
       excerpt: "Many Class 7 students believe that reading chapters multiple times is sufficient. But exams demand written answers. Writing practice helps organise thoughts and improves memory.",
       author: "Learning Team",
       date: "November 30, 2023",
-      image: "/D1.jpg"
+      image: "/D1.jpg",
+      category: "Academics"
     },
     {
       id: 12,
@@ -99,7 +118,8 @@ export default function BlogPage() {
       excerpt: "By Class 8, many students feel pressure but don't express it. They worry about expectations, marks, and future classes. Open discussion and proper guidance reduce this stress significantly.",
       author: "Counseling Team",
       date: "November 25, 2023",
-      image: "/9.jpg"
+      image: "/9.jpg",
+      category: "Student Life"
     },
     {
       id: 13,
@@ -107,7 +127,8 @@ export default function BlogPage() {
       excerpt: "Neat handwriting helps examiners understand answers easily. It also shows discipline. Good presentation reflects clear thinking and helps students express their knowledge effectively.",
       author: "Skills Team",
       date: "November 20, 2023",
-      image: "/10.jpg"
+      image: "/10.jpg",
+      category: "Academics"
     },
     {
       id: 14,
@@ -115,7 +136,8 @@ export default function BlogPage() {
       excerpt: "In Class 7, students start comparing marks with friends. This comparison often lowers confidence. Every student learns differently. Improvement matters more than comparison.",
       author: "Motivation Team",
       date: "November 15, 2023",
-      image: "/12.jpg"
+      image: "/12.jpg",
+      category: "Student Life"
     },
     {
       id: 15,
@@ -123,9 +145,14 @@ export default function BlogPage() {
       excerpt: "Many students finish the syllabus but forget to revise. In Class 8, this habit becomes a serious problem. Regular revision reduces exam stress and improves performance significantly.",
       author: "Revision Team",
       date: "November 10, 2023",
-      image: "/13.jpg"
+      image: "/13.jpg",
+      category: "Academics"
     }
   ]
+
+  const filteredPosts = selectedCategory === "All" 
+    ? blogPosts 
+    : blogPosts.filter(post => post.category === selectedCategory)
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -141,16 +168,33 @@ export default function BlogPage() {
                 Stay updated with the latest news, insights, and stories from Budgam's educational journey.
               </p>
             </div>
+
+            {/* Category Filter */}
+            <div className="mb-8">
+              <div className="flex flex-wrap gap-2 justify-center">
+                {categories.map((category) => (
+                  <Button
+                    key={category}
+                    variant={selectedCategory === category ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setSelectedCategory(category)}
+                    className="text-sm"
+                  >
+                    {category}
+                  </Button>
+                ))}
+              </div>
+            </div>
             
             <div className="flex flex-col lg:flex-row gap-8">
               {/* Main Content */}
               <div className="lg:w-2/3">
                 <div className="space-y-6">
-                  {blogPosts.map((post, index) => (
+                  {filteredPosts.map((post, index) => (
                     <div key={post.id} className="flex items-start gap-4">
                       <div className="flex flex-col items-center">
                         <div className="w-3 h-3 bg-primary rounded-full flex-shrink-0"></div>
-                        {index < blogPosts.length - 1 && <div className="w-0.5 h-16 bg-primary/30 mt-2"></div>}
+                        {index < filteredPosts.length - 1 && <div className="w-0.5 h-16 bg-primary/30 mt-2"></div>}
                       </div>
                       <Card className="overflow-hidden hover:shadow-lg transition-shadow group flex-1">
                         <div className="flex flex-col md:flex-row">
@@ -177,6 +221,9 @@ export default function BlogPage() {
                                 <Calendar className="h-3 w-3" />
                                 <span>{post.date}</span>
                               </div>
+                              <span className="px-2 py-1 bg-primary/10 text-primary rounded-full text-xs">
+                                {post.category}
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -236,10 +283,19 @@ export default function BlogPage() {
                     <CardTitle className="text-lg">Categories</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-2">
-                    <div className="text-sm text-muted-foreground hover:text-primary cursor-pointer">Digital Education</div>
-                    <div className="text-sm text-muted-foreground hover:text-primary cursor-pointer">Teacher Training</div>
-                    <div className="text-sm text-muted-foreground hover:text-primary cursor-pointer">Infrastructure</div>
-                    <div className="text-sm text-muted-foreground hover:text-primary cursor-pointer">Student Success</div>
+                    {categories.slice(1).map((category) => (
+                      <div 
+                        key={category}
+                        className={`text-sm cursor-pointer transition-colors ${
+                          selectedCategory === category 
+                            ? "text-primary font-medium" 
+                            : "text-muted-foreground hover:text-primary"
+                        }`}
+                        onClick={() => setSelectedCategory(category)}
+                      >
+                        {category}
+                      </div>
+                    ))}
                   </CardContent>
                 </Card>
               </div>
