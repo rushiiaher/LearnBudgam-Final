@@ -7,7 +7,7 @@ import { revalidatePath } from 'next/cache';
 import { writeFile } from 'fs/promises';
 import { join } from 'path';
 
-export type Homework = {
+export interface Homework {
     id: number;
     title: string;
     description: string;
@@ -24,9 +24,8 @@ export type Homework = {
     pdf_path: string | null;
     google_drive_link: string | null;
     youtube_link: string | null;
-};
+}
 
-// Permission Check Logic based on User Rules
 async function checkHomeworkPermission(
     action: 'modify' | 'delete',
     homework: { assigned_by_role_id: number, created_by: number, school_id: number },
@@ -35,46 +34,33 @@ async function checkHomeworkPermission(
     const userId = parseInt(user.id);
     const userRole = user.roleId;
 
-    // Rule 1: Assigned by Super Admin (1)
     if (homework.assigned_by_role_id === 1) {
-        // Only SA can modify/delete. SchAdmin, Teacher cannot.
         if (userRole === 1) return true;
         return false;
     }
 
-    // Rule 2: Assigned by School Admin (2)
     if (homework.assigned_by_role_id === 2) {
-        // School Admin (of same school) can modify/delete.
         if (userRole === 2 && user.schoolId === homework.school_id) return true;
-        // SA cannot interfere.
         if (userRole === 1) return false;
         return false;
     }
 
-    // Rule 3: Assigned by Teacher (4)
     if (homework.assigned_by_role_id === 4) {
         if (action === 'modify') {
-            // Teacher (Creator) can modify
             if (userRole === 4 && userId === homework.created_by) return true;
-            // SA can modify
             if (userRole === 1) return true;
-            // School Admin (same school) can modify
             if (userRole === 2 && user.schoolId === homework.school_id) return true;
         }
         if (action === 'delete') {
-            // Teacher CANNOT delete
             if (userRole === 4) return false;
-            // SA and School Admin (same school) can delete (Allocating authority to clean up)
             if (userRole === 1) return true;
             if (userRole === 2 && user.schoolId === homework.school_id) return true;
         }
         return false;
     }
 
-    return false; // Default deny
+    return false;
 }
-
-
 
 export async function getHomework() {
     const session = await auth();
@@ -82,7 +68,6 @@ export async function getHomework() {
 
     const roleId = session.user.roleId;
     const schoolId = session.user.schoolId;
-    const userId = parseInt(session.user.id);
 
     try {
         let query = `
@@ -100,7 +85,6 @@ export async function getHomework() {
         `;
         const params: any[] = [];
 
-        // Filter Logic
         if (roleId === 1) {
             // SA sees all
         } else if (roleId === 2 && schoolId) {
@@ -143,9 +127,7 @@ export async function createHomework(formData: FormData) {
     const subject_id = formData.get('subject_id') as string;
     const google_drive_link = formData.get('google_drive_link') as string;
     const youtube_link = formData.get('youtube_link') as string;
-    const pdfFile = formData.get('pdf_file') as File | null;
 
-    // Auto-scope School
     if (roleId !== 1 && userSchoolId) {
         school_id = userSchoolId.toString();
     }
@@ -154,47 +136,13 @@ export async function createHomework(formData: FormData) {
         return { success: false, message: 'Missing required fields.' };
     }
 
-    // Role-Specific Validation (Teacher)
-    if (roleId === 4) {
-        const [subRows] = await pool.execute<RowDataPacket[]>('SELECT id FROM subjects WHERE id = ? AND teacher_id = ?', [subject_id, userId]);
-        if (subRows.length === 0) {
-            const [adminRows] = await pool.execute<RowDataPacket[]>('SELECT class_id FROM class_admin_profiles WHERE user_id = ? AND class_id = ?', [userId, class_id]);
-            if (subRows.length === 0 && adminRows.length === 0) {
-                return { success: false, message: 'You can only assign homework for your assigned subjects or class.' };
-            }
-        }
-    }
-
-    let pdf_path: string | null = null;
-    if (pdfFile && pdfFile.size > 0) {
-        try {
-            const bytes = await pdfFile.arrayBuffer();
-            const buffer = Buffer.from(bytes);
-            const fileName = `${Date.now()}-${pdfFile.name.replace(/\s+/g, '_')}`;
-            const uploadDir = join(process.cwd(), 'public/uploads/homework');
-            // Ensure directory exists (node 10+ handles recursive mkdir, but let's assume it exists or create simple)
-            // simplified: assume public/uploads/homework exists or create manually in setup. 
-            // Better: create it.
-            const fs = require('fs');
-            if (!fs.existsSync(uploadDir)) {
-                fs.mkdirSync(uploadDir, { recursive: true });
-            }
-
-            await writeFile(join(uploadDir, fileName), buffer);
-            pdf_path = `/uploads/homework/${fileName}`;
-        } catch (error) {
-            console.error('File upload failed:', error);
-            return { success: false, message: 'Failed to upload PDF.' };
-        }
-    }
-
     try {
         await pool.execute(
             `INSERT INTO homework (
                 title, description, school_id, class_id, subject_id, 
-                assigned_by_role_id, created_by, pdf_path, google_drive_link, youtube_link
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-            [title, description, parseInt(school_id), parseInt(class_id), parseInt(subject_id), roleId, userId, pdf_path, google_drive_link || null, youtube_link || null]
+                assigned_by_role_id, created_by, google_drive_link, youtube_link
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            [title, description, parseInt(school_id), parseInt(class_id), parseInt(subject_id), roleId, userId, google_drive_link || null, youtube_link || null]
         );
 
         revalidatePath('/dashboard/homework');
@@ -209,22 +157,15 @@ export async function updateHomework(id: number, formData: FormData) {
     const session = await auth();
     if (!session?.user) return { success: false, message: 'Unauthorized' };
 
-    // 1. Fetch existing homework to check permissions
     const [rows] = await pool.execute<RowDataPacket[]>('SELECT * FROM homework WHERE id = ?', [id]);
     if (rows.length === 0) return { success: false, message: 'Homework not found.' };
-    const homework = rows[0] as any; // Cast to any or define type
+    const homework = rows[0] as any;
 
-    // 2. Permission Check
     const canModify = await checkHomeworkPermission('modify', homework, session.user);
     if (!canModify) return { success: false, message: 'Permission denied.' };
 
     const title = formData.get('title') as string;
     const description = formData.get('description') as string;
-
-    // Usually we don't allow changing School/Class/Subject/Role easily to prevent ownership hijacking, 
-    // unless strictly validated. Let's allow Title/Desc updates mainly.
-    // If user wants to move it, they should delete and recreate? 
-    // Let's just update content for now.
 
     try {
         await pool.execute(
