@@ -20,45 +20,58 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 
+interface DashboardFiltersProps extends React.HTMLAttributes<HTMLDivElement> {
+    userRoleId: number;
+    schoolId?: number;
+}
+
 export function DashboardFilters({
     className,
-}: React.HTMLAttributes<HTMLDivElement>) {
+    userRoleId,
+    schoolId
+}: DashboardFiltersProps) {
     const [date, setDate] = React.useState<Date | undefined>(new Date());
 
-    return (
-        <div className={cn('grid gap-4 md:grid-cols-3', className)}>
-            <Select defaultValue="all-schools">
-                <SelectTrigger>
-                    <SelectValue placeholder="Select School" />
-                </SelectTrigger>
-                <SelectContent>
-                    <SelectItem value="all-schools">All Schools</SelectItem>
-                    <SelectItem value="school-1">Learn Budgam High</SelectItem>
-                </SelectContent>
-            </Select>
+    const showSchoolFilter = userRoleId === 1; // Only Super Admin sees school filter
+    const showClassFilter = userRoleId !== 5; // Everyone except students see class filter
 
-            <Select defaultValue="all-classes">
-                <SelectTrigger>
-                    <SelectValue placeholder="Select Class" />
-                </SelectTrigger>
-                <SelectContent>
-                    <SelectItem value="all-classes">All Classes</SelectItem>
-                    <SelectItem value="class-10">Class 10</SelectItem>
-                    <SelectItem value="class-9">Class 9</SelectItem>
-                </SelectContent>
-            </Select>
+    return (
+        <div className={cn('grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3', className)}>
+            {showSchoolFilter && (
+                <Select defaultValue="all-schools">
+                    <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select School" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="all-schools">All Schools</SelectItem>
+                    </SelectContent>
+                </Select>
+            )}
+
+            {showClassFilter && (
+                <Select defaultValue="all-classes">
+                    <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select Class" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="all-classes">All Classes</SelectItem>
+                    </SelectContent>
+                </Select>
+            )}
 
             <Popover>
                 <PopoverTrigger asChild>
                     <Button
                         variant={'outline'}
                         className={cn(
-                            'justify-start text-left font-normal',
+                            'w-full justify-start text-left font-normal',
                             !date && 'text-muted-foreground'
                         )}
                     >
-                        <CalendarIcon className="mr-2 h-4 w-4" />
-                        {date ? format(date, 'PPP') : <span>Pick a date</span>}
+                        <CalendarIcon className="mr-2 h-4 w-4 flex-shrink-0" />
+                        <span className="truncate">
+                            {date ? format(date, 'PPP') : 'Pick a date'}
+                        </span>
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="start">

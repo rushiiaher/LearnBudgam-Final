@@ -15,9 +15,9 @@ export default async function ManageStudentsPage() {
     ]);
 
     return (
-        <div className="space-y-6">
-            <div className="flex items-center justify-between">
-                <h1 className="text-2xl font-bold tracking-tight">Manage Students</h1>
+        <div className="space-y-4 md:space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-3 sm:space-y-0">
+                <h1 className="text-xl md:text-2xl font-bold tracking-tight">Manage Students</h1>
                 <AddStudentDialog
                     schools={schools}
                     userRole={roleId}
@@ -25,7 +25,9 @@ export default async function ManageStudentsPage() {
                 />
             </div>
 
-            <StudentTable students={students} schools={schools} />
+            <div className="overflow-x-auto">
+                <StudentTable students={students} schools={schools} />
+            </div>
         </div>
     );
 }
