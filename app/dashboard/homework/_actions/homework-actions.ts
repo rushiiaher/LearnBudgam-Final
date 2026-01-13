@@ -4,6 +4,8 @@ import pool from '@/lib/db';
 import { RowDataPacket, ResultSetHeader } from 'mysql2';
 import { auth } from '@/auth';
 import { revalidatePath } from 'next/cache';
+import { writeFile } from 'fs/promises';
+import { join } from 'path';
 
 export type Homework = {
     id: number;
@@ -19,6 +21,9 @@ export type Homework = {
     created_by: number;
     created_by_name: string;
     created_at: string;
+    pdf_path: string | null;
+    google_drive_link: string | null;
+    youtube_link: string | null;
 };
 
 // Permission Check Logic based on User Rules
@@ -69,29 +74,7 @@ async function checkHomeworkPermission(
     return false; // Default deny
 }
 
-import { writeFile } from 'fs/promises';
-import { join } from 'path';
 
-export type Homework = {
-    id: number;
-    title: string;
-    description: string;
-    school_id: number;
-    school_name: string;
-    class_id: number;
-    class_name: string;
-    subject_id: number;
-    subject_name: string;
-    assigned_by_role_id: number;
-    created_by: number;
-    created_by_name: string;
-    created_at: string;
-    pdf_path: string | null;
-    google_drive_link: string | null;
-    youtube_link: string | null;
-};
-
-// ... checkHomeworkPermission ...
 
 export async function getHomework() {
     const session = await auth();

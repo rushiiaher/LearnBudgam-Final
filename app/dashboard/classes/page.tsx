@@ -21,7 +21,7 @@ export default async function ManageClassesPage() {
                 <AddClassDialog
                     schools={schools}
                     userRole={roleId}
-                    userSchoolId={userSchoolId}
+                    userSchoolId={userSchoolId || undefined}
                 />
             </div>
 
