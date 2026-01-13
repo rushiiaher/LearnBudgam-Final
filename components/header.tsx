@@ -34,17 +34,16 @@ export function Header() {
         <div className="container mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <Link href="/" className="flex items-center gap-2 flex-shrink-0 ml-4">
-              <span className="font-semibold text-lg sm:text-xl text-foreground">𝕷𝖊𝖆𝖗𝖓</span>
-              <div className="relative h-14 w-14 sm:h-16 sm:w-16 flex items-center justify-center">
+              <div className="relative h-12 w-12 sm:h-14 sm:w-14 flex items-center justify-center">
                 <Image
                   src="/logo2.png"
                   alt="Learn Budgam Logo"
                   width={56}
                   height={56}
-                  className="h-12 w-12 sm:h-14 sm:w-14 object-cover rounded-full mix-blend-multiply dark:mix-blend-screen"
+                  className="h-10 w-10 sm:h-12 sm:w-12 object-cover rounded-full"
                 />
               </div>
-              <span className="font-semibold text-lg sm:text-xl text-foreground">𝕭𝖚𝖉𝖌𝖆𝖒</span>
+              <span className="font-bold text-xl text-foreground">Learn Budgam</span>
             </Link>
 
             {/* Desktop Navigation */}
