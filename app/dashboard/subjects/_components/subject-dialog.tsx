@@ -46,7 +46,9 @@ export function AddSubjectDialog({
 
     const isSchoolAdmin = userRole === 2;
     // Default to 'global' if not School Admin and not editing a specific school's subject
-    const defaultSchoolId = isSchoolAdmin ? userSchoolId?.toString() : (subjectToEdit?.school_id ? subjectToEdit.school_id.toString() : 'global');
+    const defaultSchoolId = isSchoolAdmin 
+        ? userSchoolId?.toString() 
+        : (subjectToEdit && subjectToEdit.school_id !== null ? subjectToEdit.school_id.toString() : 'global');
     const [selectedSchool, setSelectedSchool] = useState<string>(defaultSchoolId || 'global');
 
     useEffect(() => {

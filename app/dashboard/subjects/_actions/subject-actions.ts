@@ -15,6 +15,7 @@ export type Subject = {
     created_at: string;
     assigned_schools: string | null;
     school_name: string | null; // Added for type safety
+    school_id: number | null;
 };
 
 export async function getSubjects() {
