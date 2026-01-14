@@ -4,7 +4,7 @@ import pool from '@/lib/db';
 import { RowDataPacket, ResultSetHeader } from 'mysql2';
 import { revalidatePath } from 'next/cache';
 import { auth } from '@/auth';
-import { writeFile, unlink } from 'fs/promises';
+import { writeFile, unlink, mkdir } from 'fs/promises';
 import path from 'path';
 
 export type BlogCategory = {
@@ -121,6 +121,7 @@ export async function createBlog(formData: FormData) {
             const buffer = Buffer.from(await imageFile.arrayBuffer());
             const fileName = `${Date.now()}-${imageFile.name.replace(/\s/g, '_')}`;
             const uploadDir = path.resolve(process.cwd(), 'public/uploads/blogs');
+            await mkdir(uploadDir, { recursive: true });
             await writeFile(path.join(uploadDir, fileName), buffer);
             image_path = `/uploads/blogs/${fileName}`;
         }
@@ -156,6 +157,7 @@ export async function updateBlog(id: number, formData: FormData) {
         const buffer = Buffer.from(await imageFile.arrayBuffer());
         const fileName = `${Date.now()}-${imageFile.name.replace(/\s/g, '_')}`;
         const uploadDir = path.resolve(process.cwd(), 'public/uploads/blogs');
+        await mkdir(uploadDir, { recursive: true });
         await writeFile(path.join(uploadDir, fileName), buffer);
         image_path = `/uploads/blogs/${fileName}`;
     }
