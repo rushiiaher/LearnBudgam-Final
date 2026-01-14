@@ -75,12 +75,9 @@ export function AddHomeworkDialog({
 
     async function handleSubmit(formData: FormData) {
         setLoading(true);
-        formData.append('school_id', selectedSchool);
-        if (selectedClass) formData.append('class_id', selectedClass);
-        if (selectedSubject) formData.append('subject_id', selectedSubject);
-
-        // If editing, preserve assigned-by meta is handled in backend logic usually.
-        // Update Action just updates Title/Desc.
+        formData.set('school_id', selectedSchool);
+        formData.set('class_id', selectedClass);
+        formData.set('subject_id', selectedSubject);
 
         let res;
         if (homeworkToEdit) {
@@ -136,6 +133,7 @@ export function AddHomeworkDialog({
                                     ))}
                                 </SelectContent>
                             </Select>
+                            <input type="hidden" name="school_id" value={selectedSchool} />
                         </div>
                     )}
 
@@ -156,6 +154,7 @@ export function AddHomeworkDialog({
                                 ))}
                             </SelectContent>
                         </Select>
+                        <input type="hidden" name="class_id" value={selectedClass} />
                     </div>
 
                     {/* Subject Selection - Disabled on Edit */}
@@ -171,6 +170,7 @@ export function AddHomeworkDialog({
                                 ))}
                             </SelectContent>
                         </Select>
+                        <input type="hidden" name="subject_id" value={selectedSubject} />
                     </div>
 
                     <div className="grid gap-2">

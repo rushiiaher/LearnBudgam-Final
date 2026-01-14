@@ -38,7 +38,7 @@ export function AddClassDialog({
     userRole?: number,
     userSchoolId?: number
 }) {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(!!classToEdit);
     const [loading, setLoading] = useState(false);
 
     const handleOpenChange = (newOpen: boolean) => {
@@ -71,7 +71,7 @@ export function AddClassDialog({
     const defaultSchoolId = isSchoolAdmin ? userSchoolId?.toString() : (classToEdit?.school_id ? classToEdit.school_id.toString() : 'global');
 
     return (
-        <Dialog open={classToEdit ? true : open} onOpenChange={handleOpenChange}>
+        <Dialog open={open} onOpenChange={handleOpenChange}>
             {!classToEdit && (
                 <DialogTrigger asChild>
                     <Button className="bg-purple-600 hover:bg-purple-700 text-white">

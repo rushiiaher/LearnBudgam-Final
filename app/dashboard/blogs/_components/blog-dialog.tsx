@@ -46,10 +46,8 @@ export function BlogDialog({
         setLoading(true);
         const formData = new FormData(event.currentTarget);
 
-        // Append Category ID (Select component doesn't submit naturally)
-        if (selectedCategory) {
-            formData.set('category_id', selectedCategory);
-        }
+        // Ensure category_id is set
+        formData.set('category_id', selectedCategory);
 
         const res = blogToEdit
             ? await updateBlog(blogToEdit.id, formData)
@@ -96,6 +94,7 @@ export function BlogDialog({
                                     ))}
                                 </SelectContent>
                             </Select>
+                            <input type="hidden" name="category_id" value={selectedCategory} />
                         </div>
                         <div className="grid gap-2">
                             <Label htmlFor="published_at">Published Date</Label>

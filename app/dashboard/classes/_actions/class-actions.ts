@@ -177,12 +177,20 @@ export async function createClass(formData: FormData) {
 export async function updateClass(id: number, formData: FormData) {
     const name = formData.get('name') as string;
     const school_id = formData.get('school_id') as string;
+    const isGlobal = !school_id || school_id === '' || school_id === 'global';
 
     try {
-        await pool.execute(
-            'UPDATE classes SET name = ?, school_id = ? WHERE id = ?',
-            [name, parseInt(school_id), id]
-        );
+        if (isGlobal) {
+            await pool.execute(
+                'UPDATE classes SET name = ?, school_id = NULL WHERE id = ?',
+                [name, id]
+            );
+        } else {
+            await pool.execute(
+                'UPDATE classes SET name = ?, school_id = ? WHERE id = ?',
+                [name, parseInt(school_id), id]
+            );
+        }
         revalidatePath('/dashboard/classes');
         return { success: true, message: 'Class updated successfully.' };
     } catch (error) {
