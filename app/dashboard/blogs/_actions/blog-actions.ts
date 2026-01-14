@@ -103,35 +103,31 @@ export async function getBlogById(id: number) {
 }
 
 export async function createBlog(formData: FormData) {
-    const title = formData.get('title') as string;
-    const category_id = formData.get('category_id') as string;
-    const excerpt = formData.get('excerpt') as string;
-    const content = formData.get('content') as string;
-    const author = formData.get('author') as string;
-    const published_at = formData.get('published_at') as string;
-    const imageFile = formData.get('image_file') as File | null;
-
-    if (!title || !category_id) {
-        return { success: false, message: 'Title and Category are required.' };
-    }
-
-    let image_path = null;
-    if (imageFile && imageFile.size > 0) {
-        const buffer = Buffer.from(await imageFile.arrayBuffer());
-        const fileName = `${Date.now()}-${imageFile.name.replace(/\s/g, '_')}`;
-        const uploadDir = path.resolve(process.cwd(), 'public/uploads/blogs');
-
-        // Ensure dir exists (usually good to check, assuming standard public/uploads structure)
-        // await mkdir(uploadDir, { recursive: true }); 
-
-        await writeFile(path.join(uploadDir, fileName), buffer);
-        image_path = `/uploads/blogs/${fileName}`;
-    }
-
-    const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
-    const formattedDate = published_at || new Date().toISOString().split('T')[0];
-
     try {
+        const title = formData.get('title') as string;
+        const category_id = formData.get('category_id') as string;
+        const excerpt = formData.get('excerpt') as string;
+        const content = formData.get('content') as string;
+        const author = formData.get('author') as string;
+        const published_at = formData.get('published_at') as string;
+        const imageFile = formData.get('image_file') as File | null;
+
+        if (!title || !category_id) {
+            return { success: false, message: 'Title and Category are required.' };
+        }
+
+        let image_path = null;
+        if (imageFile && imageFile.size > 0) {
+            const buffer = Buffer.from(await imageFile.arrayBuffer());
+            const fileName = `${Date.now()}-${imageFile.name.replace(/\s/g, '_')}`;
+            const uploadDir = path.resolve(process.cwd(), 'public/uploads/blogs');
+            await writeFile(path.join(uploadDir, fileName), buffer);
+            image_path = `/uploads/blogs/${fileName}`;
+        }
+
+        const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+        const formattedDate = published_at || new Date().toISOString().split('T')[0];
+
         await pool.execute(
             `INSERT INTO blogs (title, slug, excerpt, content, category_id, author, published_at, image_path) 
              VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
@@ -142,7 +138,7 @@ export async function createBlog(formData: FormData) {
         return { success: true, message: 'Blog post created successfully.' };
     } catch (error: any) {
         console.error('Create blog error:', error);
-        return { success: false, message: 'Failed to create blog post.' };
+        return { success: false, message: error.message || 'Failed to create blog post.' };
     }
 }
 
