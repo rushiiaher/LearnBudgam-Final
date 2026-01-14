@@ -102,6 +102,21 @@ export async function getBlogById(id: number) {
     }
 }
 
+export async function getBlogBySlug(slug: string) {
+    try {
+        const [rows] = await pool.execute<RowDataPacket[]>(`
+            SELECT b.*, c.name as category_name 
+            FROM blogs b
+            LEFT JOIN blog_categories c ON b.category_id = c.id
+            WHERE b.slug = ?
+        `, [slug]);
+        return (rows[0] as BlogPost) || null;
+    } catch (error) {
+        console.error('Failed to fetch blog by slug:', error);
+        return null;
+    }
+}
+
 export async function createBlog(formData: FormData) {
     try {
         const title = formData.get('title') as string;

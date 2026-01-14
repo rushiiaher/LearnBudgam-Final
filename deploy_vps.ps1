@@ -23,7 +23,7 @@ Write-Host "`nuwu Step 2: Uploading files to $Destination..." -ForegroundColor Y
 Write-Host "   (You might be asked for your VPS password)" -ForegroundColor Gray
 
 # Upload Config Files & Assets
-scp package.json pnpm-lock.yaml next.config.mjs ecosystem.config.js $Destination
+scp package.json pnpm-lock.yaml next.config.mjs ecosystem.config.js update_blog_schema.sql $Destination
 scp -r public $Destination
 
 # Upload Build Artifacts (The heavy part)

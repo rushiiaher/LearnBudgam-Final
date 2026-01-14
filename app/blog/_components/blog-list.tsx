@@ -4,7 +4,8 @@ import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Calendar, User } from "lucide-react"
-import { BlogPost, BlogCategory } from "../dashboard/blogs/_actions/blog-actions"
+import { BlogPost, BlogCategory } from "@/app/dashboard/blogs/_actions/blog-actions"
+import Link from "next/link"
 import Image from "next/image"
 
 export function BlogList({
@@ -62,45 +63,47 @@ export function BlogList({
                                         <div className="w-3 h-3 bg-primary rounded-full flex-shrink-0"></div>
                                         {index < filteredPosts.length - 1 && <div className="w-0.5 h-16 bg-primary/30 mt-2"></div>}
                                     </div>
-                                    <Card className="overflow-hidden hover:shadow-lg transition-shadow group flex-1">
-                                        <div className="flex flex-col md:flex-row">
-                                            <div className="md:w-1/4 aspect-video md:aspect-[4/3] bg-gray-100 relative">
-                                                {post.image_path ? (
-                                                    <Image
-                                                        src={post.image_path}
-                                                        alt={post.title}
-                                                        fill
-                                                        className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
-                                                    />
-                                                ) : (
-                                                    <div className="flex items-center justify-center h-full text-gray-300 bg-gray-50">
-                                                        <span className="text-xs">No Image</span>
+                                    <Link href={`/blog/${post.slug}`} className="flex-1 group">
+                                        <Card className="overflow-hidden hover:shadow-lg transition-shadow">
+                                            <div className="flex flex-col md:flex-row">
+                                                <div className="md:w-1/4 aspect-video md:aspect-[4/3] bg-gray-100 relative">
+                                                    {post.image_path ? (
+                                                        <Image
+                                                            src={post.image_path}
+                                                            alt={post.title}
+                                                            fill
+                                                            className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                                                        />
+                                                    ) : (
+                                                        <div className="flex items-center justify-center h-full text-gray-300 bg-gray-50">
+                                                            <span className="text-xs">No Image</span>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                                <div className="md:w-3/4 p-4">
+                                                    <CardTitle className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
+                                                        {post.title}
+                                                    </CardTitle>
+                                                    <p className="text-muted-foreground text-sm leading-relaxed mb-3 line-clamp-3">
+                                                        {post.excerpt}
+                                                    </p>
+                                                    <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                                                        <div className="flex items-center gap-1">
+                                                            <User className="h-3 w-3" />
+                                                            <span>{post.author}</span>
+                                                        </div>
+                                                        <div className="flex items-center gap-1">
+                                                            <Calendar className="h-3 w-3" />
+                                                            <span>{new Date(post.published_at).toLocaleDateString()}</span>
+                                                        </div>
+                                                        <span className="px-2 py-1 bg-primary/10 text-primary rounded-full text-xs">
+                                                            {post.category_name}
+                                                        </span>
                                                     </div>
-                                                )}
-                                            </div>
-                                            <div className="md:w-3/4 p-4">
-                                                <CardTitle className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
-                                                    {post.title}
-                                                </CardTitle>
-                                                <p className="text-muted-foreground text-sm leading-relaxed mb-3 line-clamp-3">
-                                                    {post.excerpt}
-                                                </p>
-                                                <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                                                    <div className="flex items-center gap-1">
-                                                        <User className="h-3 w-3" />
-                                                        <span>{post.author}</span>
-                                                    </div>
-                                                    <div className="flex items-center gap-1">
-                                                        <Calendar className="h-3 w-3" />
-                                                        <span>{new Date(post.published_at).toLocaleDateString()}</span>
-                                                    </div>
-                                                    <span className="px-2 py-1 bg-primary/10 text-primary rounded-full text-xs">
-                                                        {post.category_name}
-                                                    </span>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </Card>
+                                        </Card>
+                                    </Link>
                                 </div>
                             ))
                         )}
@@ -136,8 +139,8 @@ export function BlogList({
                                 <div
                                     key={category.id}
                                     className={`text-sm cursor-pointer transition-colors ${selectedCategory === category.name
-                                            ? "text-primary font-medium"
-                                            : "text-muted-foreground hover:text-primary"
+                                        ? "text-primary font-medium"
+                                        : "text-muted-foreground hover:text-primary"
                                         }`}
                                     onClick={() => setSelectedCategory(category.name)}
                                 >
