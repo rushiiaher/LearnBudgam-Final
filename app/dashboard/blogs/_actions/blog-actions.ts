@@ -129,12 +129,13 @@ export async function createBlog(formData: FormData) {
     }
 
     const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+    const formattedDate = published_at || new Date().toISOString().split('T')[0];
 
     try {
         await pool.execute(
             `INSERT INTO blogs (title, slug, excerpt, content, category_id, author, published_at, image_path) 
              VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-            [title, slug, excerpt, content, parseInt(category_id), author, published_at || new Date(), image_path]
+            [title, slug, excerpt, content, parseInt(category_id), author, formattedDate, image_path]
         );
         revalidatePath('/dashboard/blogs');
         revalidatePath('/blog');
