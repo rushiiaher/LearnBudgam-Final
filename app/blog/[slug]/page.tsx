@@ -8,13 +8,14 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 interface BlogPostPageProps {
-    params: {
+    params: Promise<{
         slug: string;
-    };
+    }>;
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-    const post = await getBlogBySlug(params.slug);
+    const { slug } = await params;
+    const post = await getBlogBySlug(slug);
 
     if (!post) {
         notFound();
