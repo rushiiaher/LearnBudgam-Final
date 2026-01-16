@@ -11,9 +11,9 @@ export default async function DashboardPage() {
   const user = session?.user;
   const userRoleId = user?.roleId || user?.role?.id || 5;
   const schoolId = user?.schoolId;
-  
+
   const [stats, schoolDetails] = await Promise.all([
-    getDashboardStats(userRoleId, schoolId),
+    getDashboardStats(userRoleId, schoolId ?? undefined),
     schoolId ? getSchoolDetails(schoolId) : null
   ]);
 
@@ -33,7 +33,7 @@ export default async function DashboardPage() {
       <div className="space-y-4">
         <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-3 md:p-4">
           <h3 className="mb-3 md:mb-4 text-sm font-medium text-muted-foreground">Filters</h3>
-          <DashboardFilters userRoleId={userRoleId} schoolId={schoolId} />
+          <DashboardFilters userRoleId={userRoleId} schoolId={schoolId ?? undefined} />
         </div>
 
         <Tabs defaultValue="overview" className="space-y-4">
