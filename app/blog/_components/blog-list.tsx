@@ -64,15 +64,15 @@ export function BlogList({
                                         {index < filteredPosts.length - 1 && <div className="w-0.5 h-16 bg-primary/30 mt-2"></div>}
                                     </div>
                                     <Link href={`/blog/${post.slug}`} className="flex-1 group">
-                                        <Card className="overflow-hidden hover:shadow-lg transition-shadow">
+                                        <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:border-primary/50 relative">
                                             <div className="flex flex-col md:flex-row">
-                                                <div className="md:w-1/4 aspect-video md:aspect-[4/3] bg-gray-100 relative">
+                                                <div className="md:w-1/4 aspect-video md:aspect-[4/3] bg-gray-100 relative overflow-hidden">
                                                     {post.image_path ? (
                                                         <Image
                                                             src={post.image_path}
                                                             alt={post.title}
                                                             fill
-                                                            className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                                                            className="object-cover object-center group-hover:scale-110 transition-transform duration-500"
                                                         />
                                                     ) : (
                                                         <div className="flex items-center justify-center h-full text-gray-300 bg-gray-50">
@@ -80,25 +80,35 @@ export function BlogList({
                                                         </div>
                                                     )}
                                                 </div>
-                                                <div className="md:w-3/4 p-4">
-                                                    <CardTitle className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
-                                                        {post.title}
-                                                    </CardTitle>
-                                                    <p className="text-muted-foreground text-sm leading-relaxed mb-3 line-clamp-3">
-                                                        {post.excerpt}
-                                                    </p>
-                                                    <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                                                        <div className="flex items-center gap-1">
-                                                            <User className="h-3 w-3" />
-                                                            <span>{post.author}</span>
+                                                <div className="md:w-3/4 p-6 flex flex-col justify-between">
+                                                    <div>
+                                                        <div className="flex items-center gap-2 mb-2">
+                                                            <span className="px-2 py-0.5 bg-primary/10 text-primary rounded-full text-[10px] font-semibold uppercase tracking-wider">
+                                                                {post.category_name}
+                                                            </span>
                                                         </div>
-                                                        <div className="flex items-center gap-1">
-                                                            <Calendar className="h-3 w-3" />
-                                                            <span>{new Date(post.published_at).toLocaleDateString()}</span>
+                                                        <CardTitle className="text-xl font-bold mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                                                            {post.title}
+                                                        </CardTitle>
+                                                        <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2">
+                                                            {post.excerpt}
+                                                        </p>
+                                                    </div>
+
+                                                    <div className="flex items-center justify-between mt-auto">
+                                                        <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                                                            <div className="flex items-center gap-1.5">
+                                                                <User className="h-3.5 w-3.5" />
+                                                                <span>{post.author}</span>
+                                                            </div>
+                                                            <div className="flex items-center gap-1.5">
+                                                                <Calendar className="h-3.5 w-3.5" />
+                                                                <span>{new Date(post.published_at).toLocaleDateString()}</span>
+                                                            </div>
                                                         </div>
-                                                        <span className="px-2 py-1 bg-primary/10 text-primary rounded-full text-xs">
-                                                            {post.category_name}
-                                                        </span>
+                                                        <Button variant="ghost" size="sm" className="hidden sm:flex text-primary hover:text-primary hover:bg-primary/5 -mr-2">
+                                                            Read More &rarr;
+                                                        </Button>
                                                     </div>
                                                 </div>
                                             </div>

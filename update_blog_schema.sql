@@ -17,7 +17,7 @@ PREPARE alterIfNotExists FROM @preparedStatement;
 EXECUTE alterIfNotExists;
 DEALLOCATE PREPARE alterIfNotExists;
 
--- Add slug column if it doesn't exist
+-- Add slug column if it doesn't exist (initially nullable)
 SET @columnname = "slug";
 SET @preparedStatement = (SELECT IF(
   (
@@ -28,8 +28,11 @@ SET @preparedStatement = (SELECT IF(
       AND (column_name = @columnname)
   ) > 0,
   "SELECT 1",
-  "ALTER TABLE blogs ADD COLUMN slug VARCHAR(255) NOT NULL"
+  "ALTER TABLE blogs ADD COLUMN slug VARCHAR(255)"
 ));
 PREPARE alterIfNotExists FROM @preparedStatement;
 EXECUTE alterIfNotExists;
 DEALLOCATE PREPARE alterIfNotExists;
+
+-- Update existing slugs if they are NULL or empty
+UPDATE blogs SET slug = CONCAT('post-', id) WHERE slug IS NULL OR slug = '';
